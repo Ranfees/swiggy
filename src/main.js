@@ -3,19 +3,18 @@ import { createRouter, createWebHistory } from 'vue-router'
 import App from './App.vue'
 
 import home from './components/home.vue'
-import searchbar from './components/searchbar.vue'
-import signIn from './components/sign-in.vue'
-import pothichor from './components/pothichor.vue'
-import biriyani from './components/biriyani.vue'
-import shake from './components/shake.vue'
-import Shawarma from './components/shawarma.vue'
-import dosa from './components/dosa.vue'
-import vada from './components/vada.vue'
-import rolls from './components/rolls.vue'
-import chinese from './components/chinese.vue'
-import pasta from './components/pasta.vue'
-import pizza from './components/pizza.vue'
-import noodles from './components/noodles.vue'
+import searchbar from './components/navbar-components/searchbar.vue'
+import pothichor from './components/whats-on-ur-mind-compo/pothichor.vue'
+import biriyani from './components/whats-on-ur-mind-compo/biriyani.vue'
+import shake from './components/whats-on-ur-mind-compo/shake.vue'
+import Shawarma from './components/whats-on-ur-mind-compo/shawarma.vue'
+import dosa from './components/whats-on-ur-mind-compo/dosa.vue'
+import vada from './components/whats-on-ur-mind-compo/vada.vue'
+import rolls from './components/whats-on-ur-mind-compo/rolls.vue'
+import chinese from './components/whats-on-ur-mind-compo/chinese.vue'
+import pasta from './components/whats-on-ur-mind-compo/pasta.vue'
+import pizza from './components/whats-on-ur-mind-compo/pizza.vue'
+import noodles from './components/whats-on-ur-mind-compo/noodles.vue'
 import pizzaHut from './components/top-resto-components/pizza-hut.vue'
 import icecreamcorner from './components/top-resto-components/thomson.vue'
 import Thomson from './components/top-resto-components/thomson.vue'
@@ -26,6 +25,7 @@ import soofi from './components/top-resto-components/soofi.vue'
 import Dominos from './components/top-resto-components/dominos.vue'
 import Soofi from './components/top-resto-components/soofi.vue'
 import ArabianGrill from './components/top-resto-components/arabian-grill.vue'
+import cart from './components/navbar-components/cart.vue'
 
 
 const router = createRouter({
@@ -34,6 +34,11 @@ const router = createRouter({
     {
         path: '/', 
         component: home
+    },
+  
+    {
+        path:'/cart',
+        component:cart
     },
      {
         path: '/search', 
@@ -79,10 +84,6 @@ const router = createRouter({
         path: '/dosa',
         component: dosa
     },
-    {
-        path:'/signin',
-        component:signIn
-    }, 
     {
         path: '/pizzahut', 
         component: pizzaHut

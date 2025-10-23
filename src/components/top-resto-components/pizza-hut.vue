@@ -19,15 +19,14 @@
             <span id="cost"><b>...</b></span>
         </div>
 
-
         <div class="mt-2" style="font-size: 12px;">
             <a href="#" id="cuisine-link" style="text-decoration: underline;" class="text-danger font-weight-bold">...</a>
         </div>
 
-        <div class="mt-2 d-flex" style="font-size: 14px;">
+        <div class="mt-2 d-flex flex-wrap align-items-center" style="font-size: 14px;">
             <span class="mx-2">•</span>
-            <span class="mr-3"><b>Outlet</b></span>
-            <p id="outlet">...</p>
+            <span class="mr-2"><b>Outlet</b></span>
+            <p id="outlet" class="mb-0">...</p>
             <span class="ml-2 text-secondary">▼</span>
         </div>
 
@@ -93,7 +92,7 @@
         <i class="bi bi-search text-muted"></i>
         </div>
 
-        <div class="filter-buttons d-flex mt-3">
+        <div class="filter-buttons d-flex mt-3 flex-wrap">
         <div class="filter-btn">
             <span class="veg-icon" style="border-color: green"></span>
         </div>
@@ -122,8 +121,8 @@
         </div>
     </div>
 
-        <!-- Recommended items (repeated statically) -->
-    <div v-for="n in 7" :key="n" class="container menu-item d-flex justify-content-between align-items-start py-3 border-top">
+        <!-- Recommended items -->
+    <div v-for="n in 7" :key="n" class="container menu-item d-flex justify-content-between align-items-start py-3 border-top flex-wrap">
         <div class="item-info pr-3">
             <div class="veg-icon mb-1"></div>
 
@@ -142,7 +141,7 @@
             </div>
         </div>
 
-        <div class="text-center">
+        <div class="text-center mt-3 mt-md-0">
                 <img src="../../../img/pizza-hut.avif" alt="Veggie Feast" class="food-img mb-1" />
                 <button class="btn btn-sm btn-light border font-weight-bold text-success w-100">ADD</button>
                 <div class="text-muted small">Customisable</div>
@@ -180,47 +179,30 @@ import { onMounted } from "vue";
 onMounted(async () => {
   try {
     const req = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.51600&lng=76.21570&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
+     "https://www.swiggy.com/dapi/restaurants/list/v5?lat=10.51600&lng=76.21570&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
     const res = await req.json();
 
-    // Extract restaurant info
-    const info =
-      res.data.cards[1].card.card.gridElements.infoWithStyle.restaurants[0].info;
+    const info = res.data.cards[1].card.card.gridElements.infoWithStyle.restaurants[0].info;
 
-    // Update top section
     document.getElementById("restaurant-name").innerHTML = `<b>${info.name}</b>`;
     document.getElementById("breadcrumb-current").textContent = info.name;
-    document.getElementById(
-      "rating"
-    ).innerHTML = `<b>${info.avgRating} (${info.totalRatingsString})</b>`;
-    document.getElementById(
-      "cost"
-    ).innerHTML = `<b>${info.costForTwoMessage || "₹350 for two"}</b>`;
-    document.getElementById("outlet").textContent =
-      info.locality || info.areaName || "Unknown Area";
+    document.getElementById("rating").innerHTML = `<b>${info.avgRating} (${info.totalRatingsString})</b>`;
+    document.getElementById("cost").innerHTML = `<b>${info.costForTwoMessage || "₹350 for two"}</b>`;
+    document.getElementById("outlet").textContent = info.locality || info.areaName || "Unknown Area";
 
-    const cuisine =
-      info.cuisines && info.cuisines.length > 0 ? info.cuisines[0] : "Cuisine";
+    const cuisine = info.cuisines && info.cuisines.length > 0 ? info.cuisines[0] : "Cuisine";
     document.getElementById("cuisine-link").textContent = cuisine;
 
-    const footerName = document.getElementById("footer-name");
-    const footerOutlet = document.getElementById("footer-outlet");
-    const footerAddress = document.getElementById("footer-address");
-
-    footerName.textContent = info.name || "Unknown Restaurant";
-    footerOutlet.textContent = `(Outlet: ${info.locality || info.areaName || "Unknown"})`;
-    footerAddress.textContent =
-      info.areaName ||
-      info.locality ||
-      "Address not available";
-
-  } catch (error) {
-    console.error("Error fetching restaurant info:", error);
+    document.getElementById("footer-name").textContent = info.name || "Unknown Restaurant";
+    document.getElementById("footer-outlet").textContent = `(Outlet: ${info.locality || info.areaName || "Unknown"})`;
+    document.getElementById("footer-address").textContent = info.areaName || info.locality || "Address not available";
   }
+   catch (error) {
+    console.error("Error fetching restaurant info:", error);
+   }
 });
 </script>
-
 
 <style scoped>
 @import "https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css";
@@ -230,32 +212,26 @@ body {
   background-color: #fafafa;
   font-family: "Poppins", sans-serif;
 }
-.deal-of-day{
+.deal-of-day {
   width: max-content;
   height: 60px;
 }
-
 .box {
   width: 100%;
-  height: max-content;
   border: 2px solid lightgray;
   border-radius: 20px;
   box-shadow: 0px 9px 3px 10px rgb(233, 230, 230);
 }
-
 .breadcrumb {
   background: none;
   font-size: 14px;
   margin-top: 15px;
 }
-.rating{
-    width: 100px;
-    border-radius: 0%;
-    background-color: white;
-    color: black;
-    
+.rating {
+  width: 100px;
+  background-color: white;
+  color: black;
 }
-
 a {
   color: grey;
 }
@@ -270,23 +246,18 @@ a {
   width: 16px;
   height: 16px;
 }
-
-
 .deals-section {
   position: relative;
 }
-
 .deal-scroll {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
   scrollbar-width: none;
 }
-
 .deal-scroll::-webkit-scrollbar {
   display: none;
 }
-
 .deal-card {
   flex: 0 0 auto;
   display: flex;
@@ -299,19 +270,16 @@ a {
   min-width: 260px;
   margin-right: 15px;
 }
-
 .deal-icon {
   margin-right: 12px;
   font-size: 20px;
   color: #ff6600;
 }
-
 .scroll-btns {
   position: absolute;
   right: 0;
   top: 0;
 }
-
 .scroll-btn {
   background-color: #f2f2f2;
   border-radius: 50%;
@@ -320,16 +288,13 @@ a {
   cursor: pointer;
   transition: background 0.3s;
 }
-
 .scroll-btn:hover {
   background-color: #ddd;
 }
-
 .main-container {
   margin-left: 350px;
   margin-right: 350px;
 }
-
 .menu-title {
   text-align: center;
   font-weight: 500;
@@ -338,14 +303,12 @@ a {
   margin-bottom: 20px;
   position: relative;
 }
-
 .menu-title::before,
 .menu-title::after {
   content: "❧";
   color: gray;
   margin: 0 10px;
 }
-
 .search-bar {
   background-color: #e9e9e9;
   border-radius: 15px;
@@ -354,7 +317,6 @@ a {
   align-items: center;
   justify-content: space-between;
 }
-
 .search-bar input {
   border: none;
   background: transparent;
@@ -362,11 +324,9 @@ a {
   outline: none;
   font-weight: 500;
 }
-
 .filter-buttons {
   margin-top: 20px;
 }
-
 .filter-btn {
   border-radius: 25px;
   padding: 5px 15px;
@@ -376,7 +336,6 @@ a {
   display: inline-flex;
   align-items: center;
 }
-
 .veg-icon,
 .nonveg-icon {
   width: 16px;
@@ -387,7 +346,6 @@ a {
   margin-right: 5px;
   position: relative;
 }
-
 .veg-icon::after {
   content: "";
   width: 8px;
@@ -398,7 +356,6 @@ a {
   left: 3px;
   border-radius: 50%;
 }
-
 .nonveg-icon::after {
   content: "";
   width: 8px;
@@ -409,14 +366,12 @@ a {
   left: 3px;
   border-radius: 50%;
 }
-
 .bestseller-btn {
   border-radius: 25px;
   padding: 5px 15px;
   font-size: 14px;
   border: 1px solid lightgray;
 }
-
 .card-carousel {
   display: flex;
   overflow-x: auto;
@@ -425,22 +380,71 @@ a {
   padding-bottom: 10px;
   scrollbar-width: none;
 }
-
 .card-carousel::-webkit-scrollbar {
   display: none;
 }
-
 .card-carousel .card {
   flex: 0 0 auto;
-  width: max-content;
-  height: max-content;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-
 .menu-item {
   font-family: "Poppins", sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px 0;
+  border-top: 1px solid #eaeaea;
+}
+
+.item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.item-info .font-weight-bold {
+  font-size: 16px;
+  color: #222;
+  margin-bottom: 5px;
+}
+
+.text-success.font-weight-bold {
+  font-size: 15px;
+}
+
+.text-muted.small {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.menu-item .text-center {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.food-img {
+  width: 130px;
+  height: 130px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.menu-item button {
+  margin-top: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 13px;
+  background-color: white;
+  border: 1px solid #ccc;
+  color: green;
+}
+
+.menu-item button:hover {
+  border-color: #28a745;
 }
 
 .food-img {
@@ -449,24 +453,93 @@ a {
   border-radius: 10px;
   object-fit: cover;
 }
-
 .img {
   width: 150px;
   height: 50px;
 }
-
 .fssat {
   width: 60px;
   height: 30px;
 }
-
 .logo-section {
   justify-content: center;
+  gap: 10px;
 }
-
 .footer-div {
   background-color: rgb(191, 187, 187);
   padding: 20px;
-  height: 70vh;
+  height: auto;
+}
+
+@media (max-width: 1200px) {
+  .main-container {
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+}
+@media (max-width: 992px) {
+ .menu-item {
+    gap: 12px;
+    padding: 15px 0;
+  }
+
+  .food-img {
+    width: 110px;
+    height: 110px;
+  }
+
+  .item-info .font-weight-bold {
+    font-size: 15px;
+  }
+
+  .text-muted.small {
+    font-size: 12px;
+  }
+
+}
+@media (max-width: 768px) {
+ .menu-item {
+    gap: 10px;
+    padding: 12px 0;
+  }
+
+  .food-img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .item-info .font-weight-bold {
+    font-size: 14px;
+  }
+
+  .text-muted.small {
+    font-size: 11.5px;
+  }
+
+  .menu-item button {
+    font-size: 12px;
+    padding: 4px 10px;
+  }
+}
+@media (max-width: 576px) {
+  .main-container {
+    margin: 0 10px;
+  }
+   .scroll-btn {
+   display: none;
+  }
+  .breadcrumb {
+    font-size: 12px;
+  }
+  .food-img {
+    width: 90px;
+    height: 90px;
+  }
+  .deal-card {
+    min-width: 160px;
+  }
+     .menu-item {
+    display: none !important;
+     }
 }
 </style>
