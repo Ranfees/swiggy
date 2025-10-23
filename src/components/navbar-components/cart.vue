@@ -1,4 +1,5 @@
 <template>
+  
   <div class="container text-center d-flex flex-column align-items-center justify-content-center parent-div">
 
     <img src="https://cdn-icons-png.flaticon.com/512/2038/2038854.png"alt="Empty Cart"class="cart-image"/>

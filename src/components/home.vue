@@ -1,18 +1,23 @@
-<template> <!-- whats on your mind template-->
+<template>
+ <!-- whats on your mind template-->
   <div class="cont my-4">
-    <div class="food-scroll-wrapper"> <!-- FIXED TITLE -->
-      <h6 class="scroll-title">What’s on your mind</h6> <!-- FIXED SCROLL BUTTONS -->
+    <div class="food-scroll-wrapper"> 
+      <h6 class="scroll-title">What’s on your mind</h6> 
       <div class="scroll-buttons"> <i class="bi bi-arrow-left-circle" @click="scrollLeft"></i> <i
-          class="bi bi-arrow-right-circle" @click="scrollRight"></i> </div> <!-- SCROLLABLE CONTENT -->
+          class="bi bi-arrow-right-circle" @click="scrollRight"></i> </div>
       <div class="food-container" ref="foodDiv">
-        <div class="food-space" v-for="(item, index) in foodImages" :key="index"> <!-- ✅ Clickable router link -->
+        <div class="food-space" v-for="(item, index) in foodImages" :key="index"> 
           <router-link :to="item.link" class="food-link"> <img class="img" :src="item.src" :alt="item.name" />
             <p class="food-name">{{ item.name }}</p>
           </router-link> </div>
       </div>
     </div>
   </div>
-  <hr class="container" style="height: 1px; background-color: ghostwhite;"> <!-- top resturants in trissur template-->
+
+  <hr class="container" style="height: 1px; background-color: ghostwhite;">
+  
+  <!-- top resturants in trissur template-->
+  
   <div class="cont my-4">
     <div class="food-scroll-wrapper">
       <div class="pizza-scroll-title">Top restaurant chains in Thrissur</div>
@@ -30,7 +35,9 @@
       </div>
     </div>
     <hr style="height: 1px; background-color: ghostwhite" />
-  </div> <!-- resturants with home delivery -->
+  </div> 
+  <!-- resturants with home delivery -->
+  
   <div class="cont my-4">
     <div class="delivery-resto-wrapper">
       <div class="div-title">Restaurants with online food delivery in Thrissur</div>
@@ -74,7 +81,95 @@
       </div>
     </transition>
   </div>
+
+  <footer class="footer">
+    <div class="footer-top">
+      <p>For better experience, download the Swiggy app now</p>
+      <div class="app-links">
+        <img src="../../img/dealoftheday/play_store.avif" alt="Google Play" />
+        <img src="../../img/dealoftheday/app_store.avif" alt="App Store" />
+      </div>
+    </div>
+
+    <div class="footer-main">
+      <div class="footer-section logo">
+        <img src="../../img/make me this logo in.png" alt="Swiggy Logo" />
+        <p>© 2025 Swiggy Limited</p>
+      </div>
+
+      <div class="footer-section">
+        <h3>Company</h3>
+        <ul>
+          <li>About Us</li>
+          <li>Swiggy Corporate</li>
+          <li>Careers</li>
+          <li>Team</li>
+          <li>Swiggy One</li>
+          <li>Swiggy Instamart</li>
+          <li>Swiggy Dineout</li>
+          <li>Swiggy Genie</li>
+          <li>Minis</li>
+          <li>Pyng</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Contact us</h3>
+        <ul>
+          <li>Help & Support</li>
+          <li>Partner with us</li>
+          <li>Ride with us</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Available in:</h3>
+        <ul>
+          <li>Bangalore</li>
+          <li>Gurgaon</li>
+          <li>Hyderabad</li>
+          <li>Delhi</li>
+          <li>Mumbai</li>
+          <li>Pune</li>
+        </ul>
+        <select>
+          <option>679 cities</option>
+        </select>
+      </div>
+
+      <div class="footer-section">
+        <h3>Life at Swiggy</h3>
+        <ul>
+          <li>Explore with Swiggy</li>
+          <li>Swiggy News</li>
+          <li>Snackables</li>
+        </ul>
+      </div>
+
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li>Terms & Conditions</li>
+          <li>Cookie Policy</li>
+          <li>Privacy Policy</li>
+          <li>Investor Relations</li>
+        </ul>
+      </div>
+
+      <div class="footer-links">
+        <h3>Social Links</h3>
+        <div class="social-icons">
+          <i class="bi bi-linkedin"></i>
+          <i class="bi bi-instagram"></i>
+          <i class="bi bi-facebook"></i>
+          <i class="bi bi-pinterest"></i>
+          <i class="bi bi-twitter"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
+
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import { useRouter } from "vue-router";
@@ -768,6 +863,108 @@ const cards2 = [
     color: #777;
     font-size: 14px;
   }
+  .footer {
+  background-color: #f6f8f9;
+  color: #2d2d2d;
+  padding: 40px 80px;
+  font-family: "Poppins", sans-serif;
+}
+
+.footer-top {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.footer-top p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.app-links img {
+  height: 50px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+
+.footer-main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 30px;
+  align-items: flex-start;
+  border-top: 1px solid #ddd;
+  padding-top: 30px;
+}
+
+.footer-section h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 15px;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #555;
+  cursor: pointer;
+}
+
+.footer-section ul li:hover {
+  color: #fc8019;
+}
+
+.logo img {
+  width: 120px;
+  margin-bottom: 10px;
+}
+
+.logo p {
+  font-size: 14px;
+  color: #666;
+}
+
+select {
+  padding: 6px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.footer-links {
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-left: 990px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+  color: #555;
+}
+
+.social-icons i:hover {
+  color: #fc8019;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 30px;
+  }
+
+  .footer-main {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
   /* ---------- Responsive ---------- */
   @media (max-width: 768px) {

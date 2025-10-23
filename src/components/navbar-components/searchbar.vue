@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-5">
-    <!-- 🔍 Search Box -->
+    <!--  Search Box -->
     <div class="input-group">
       <input
         v-model="searchQuery"
@@ -92,22 +92,18 @@ function getImageUrl(item) {
     }
   }
 
-  return cloudinaryId
-    ? `https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_100,h_100,c_fill/${cloudinaryId}`
-    : "https://via.placeholder.com/100";
-}
+  return cloudinaryId? `https://res.cloudinary.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_100,h_100,c_fill/${cloudinaryId}`: "https://via.placeholder.com/100";}
 
-// 🔍 Fetch results
 async function searchDishes() {
+  
   if (!searchQuery.value.trim()) {
-    dishes.value = [];
-    return;
+
+      dishes.value = [];
+      return;
   }
 
   try {
-    const req = await fetch(
-      `https://www.swiggy.com/dapi/restaurants/search/suggest?lat=10.51600&lng=76.21570&str=${searchQuery.value}&trackingId=null&includeIMItem=true`
-    );
+    const req = await fetch(`https://www.swiggy.com/dapi/restaurants/search/suggest?lat=10.51600&lng=76.21570&str=${searchQuery.value}&trackingId=null&includeIMItem=true` );
     const res = await req.json();
     dishes.value = res.data?.suggestions || [];
   } catch (error) {
@@ -115,7 +111,6 @@ async function searchDishes() {
   }
 }
 
-// 👀 Hide cuisines while typing
 function handleInput() {
   hideCuisines.value = !!searchQuery.value.trim();
   if (!searchQuery.value.trim()) {
@@ -123,7 +118,6 @@ function handleInput() {
   }
 }
 
-// 🧭 Restore cuisines when user clears or blurs
 function onSearchBlur() {
   setTimeout(() => {
     if (!searchQuery.value.trim()) {
@@ -135,20 +129,17 @@ function onSearchBlur() {
 </script>
 
 <style>
-/* === General Layout === */
 .container {
   max-width: 100%;
   padding: 0 1rem;
 }
 
-/* === Search Bar === */
 .search-input {
   border-radius: 10px 0 0 10px;
   font-size: 1rem;
   padding: 10px 15px;
 }
 
-/* === Scrollable Food Section === */
 .cont {
   margin: 0 auto;
   max-width: 1200px;
@@ -212,7 +203,6 @@ function onSearchBlur() {
   background-color: #eef3fb;
 }
 
-/* === Responsive Design === */
 @media (max-width: 768px) {
   .food-space {
     width: 33.33%;

@@ -77,7 +77,6 @@ function toggleMenu() {
   font-weight: 500;
   font-size: 15px;
   cursor: pointer;
-  /* transition: color 0.3s ease; */
 }
 
 .navbar-nav .nav-item a:hover,
