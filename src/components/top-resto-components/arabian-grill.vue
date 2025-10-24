@@ -183,7 +183,7 @@ onMounted(async () => {
     );
     const res = await req.json();
 
-    const info = res.data.cards[1].card.card.gridElements.infoWithStyle.restaurants[2].info;
+    const info = res.data.cards[1].card.card.gridElements.infoWithStyle.restaurants[7].info;
 
     document.getElementById("restaurant-name").innerHTML = `<b>${info.name}</b>`;
     document.getElementById("breadcrumb-current").textContent = info.name;

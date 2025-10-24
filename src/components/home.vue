@@ -55,7 +55,7 @@
       </div>
     </div>
   </div>
-  <div v-if="showLogin" id="overlay">
+  <div v-if="showLogin" id="login-overlay">
     <div class="login-box"> <i class="bi bi-x-lg close-icon" @click="closeLogin"></i>
       <h3>Login</h3> <span>or <a href="#" class="a-tag">create an account</a></span>
       <p>___</p> <input type="number" placeholder="enter your number" class="input-box" />
@@ -585,6 +585,19 @@ const cards2 = [
     font-size: 18px;
     margin-bottom: 15px;
   }
+ #login-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: flex-end; /* ✅ FIX: align login box to right */
+  align-items: stretch;
+  z-index: 2000;
+}
+
 
  .location-overlay {
   position: fixed;
